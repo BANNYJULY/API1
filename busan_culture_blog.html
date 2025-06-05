@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부산 문화예술 - 공연, 행사, 교육 정보</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #667eea;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #667eea;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            margin-top: 100px;
+            padding: 2rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .category-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .category-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .featured-events {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .featured-events h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .event-card {
+            border: 1px solid #eee;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-image {
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .event-content {
+            padding: 1.5rem;
+        }
+
+        .event-date {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .event-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .event-location {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .newsletter h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 2rem auto 0;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            padding: 1rem 2rem;
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+            text-align: center;
+            color: #666;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">부산 문화예술</div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">홈</a></li>
+                        <li><a href="#performances">공연</a></li>
+                        <li><a href="#events">행사</a></li>
+                        <li><a href="#education">교육</a></li>
+                        <li><a href="#venues">공연장</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="hero" id="home">
+                <h1>부산 문화예술의 모든 것</h1>
+                <p>부산의 다양한 문화예술 공연, 행사, 교육 정보를 한 곳에서 만나보세요. 
+                   풍부한 문화 콘텐츠와 함께 부산의 예술적 매력을 발견하세요.</p>
+            </section>
+
+            <section class="categories">
+                <div class="category-card">
+                    <span class="category-icon">🎭</span>
+                    <h3>공연 정보</h3>
+                    <p>연극, 뮤지컬, 콘서트, 오페라 등 부산에서 열리는 다양한 공연 정보를 확인하세요.</p>
+                    <a href="#performances" class="btn">더 보기</a>
+                </div>
+                <div class="category-card">
+                    <span class="category-icon">🎨</span>
+                    <h3>문화 행사</h3>
+                    <p>전시회, 페스티벌, 워크숍 등 부산의 문화 행사와 이벤트 소식을 놓치지 마세요.</p>
+                    <a href="#events" class="btn">더 보기</a>
+                </div>
+                <div class="category-card">
+                    <span class="category-icon">📚</span>
+                    <h3>문화 교육</h3>
+                    <p>문화예술 강좌, 체험 프로그램, 마스터클래스 등 다양한 교육 기회를 제공합니다.</p>
+                    <a href="#education" class="btn">더 보기</a>
+                </div>
+            </section>
+
+            <section class="featured-events" id="performances">
+                <h2>이번 달 주요 공연</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">전체</button>
+                    <button class="filter-btn" data-filter="theater">연극</button>
+                    <button class="filter-btn" data-filter="musical">뮤지컬</button>
+                    <button class="filter-btn" data-filter="concert">콘서트</button>
+                    <button class="filter-btn" data-filter="traditional">전통공연</button>
+                </div>
+                <div class="events-grid">
+                    <div class="event-card" data-category="theater">
+                        <div class="event-image">연극 포스터</div>
+                        <div class="event-content">
+                            <div class="event-date">2025.06.15 - 06.30</div>
+                            <h3 class="event-title">햄릿</h3>
+                            <div class="event-location">부산문화회관 대극장</div>
+                            <a href="#" class="btn">예매하기</a>
+                        </div>
+                    </div>
+                    <div class="event-card" data-category="musical">
+                        <div class="event-image">뮤지컬 포스터</div>
+                        <div class="event-content">
+                            <div class="event-date">2025.06.20 - 07.05</div>
+                            <h3 class="event-title">라이온 킹</h3>
+                            <div class="event-location">부산시민회관</div>
+                            <a href="#" class="btn">예매하기</a>
+                        </div>
+                    </div>
+                    <div class="event-card" data-category="concert">
+                        <div class="event-image">콘서트 포스터</div>
+                        <div class="event-content">
+                            <div class="event-date">2025.06.25</div>
+                            <h3 class="event-title">부산심포니 오케스트라</h3>
+                            <div class="event-location">부산문화회관 음악당</div>
+                            <a href="#" class="btn">예매하기</a>
+                        </div>
+                    </div>
+                    <div class="event-card" data-category="traditional">
+                        <div class="event-image">전통공연 포스터</div>
+                        <div class="event-content">
+                            <div class="event-date">2025.06.28</div>
+                            <h3 class="event-title">부산 국악한마당</h3>
+                            <div class="event-location">해운대문화회관</div>
+                            <a href="#" class="btn">예매하기</a>
+                        </div>
+                    </div>
+                    <div class="event-card" data-category="theater">
+                        <div class="event-image">연극 포스터</div>
+                        <div class="event-content">
+                            <div class="event-date">2025.07.01 - 07.15</div>
+                            <h3 class="event-title">사랑의 묘약</h3>
+                            <div class="event-location">부산문화회관 소극장</div>
+                            <a href="#" class="btn">예매하기</a>
+                        </div>
+                    </div>
+                    <div class="event-card" data-category="concert">
+                        <div class="event-image">콘서트 포스터</div>
+                        <div class="event-content">
+                            <div class="event-date">2025.07.10</div>
+                            <h3 class="event-title">부산 재즈 페스티벌</h3>
+                            <div class="event-location">벡스코</div>
+                            <a href="#" class="btn">예매하기</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="newsletter">
+                <h2>문화예술 소식 구독하기</h2>
+                <p>부산의 최신 문화예술 정보를 이메일로 받아보세요</p>
+                <form class="newsletter-form" onsubmit="handleSubscribe(event)">
+                    <input type="email" placeholder="이메일 주소를 입력하세요" required>
+                    <button type="submit">구독하기</button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 부산 문화예술. 모든 권리 보유.</p>
+            <div class="social-links">
+                <a href="#">📘</a>
+                <a href="#">📷</a>
+                <a href="#">🐦</a>
+                <a href="#">📺</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 필터 기능
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const eventCards = document.querySelectorAll('.event-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 활성 버튼 변경
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+
+                // 카드 필터링
+                eventCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                        card.style.animation = 'fadeIn 0.5s ease';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 뉴스레터 구독
+        function handleSubscribe(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input').value;
+            alert(`${email}로 구독이 완료되었습니다!`);
+            event.target.reset();
+        }
+
+        // 스크롤 효과
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // 카드 호버 효과 애니메이션
+        const cards = document.querySelectorAll('.category-card, .event-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // 페이지 로드 애니메이션
+        window.addEventListener('load', () => {
+            const elements = document.querySelectorAll('.category-card, .event-card');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    el.style.transition = 'all 0.6s ease';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
