@@ -69,7 +69,6 @@ span3 {
     color: #1AB3FF;
     font-size: 2.3rem;
     font-weight: 700;
-    font-family: 'Edu VIC WA NT Hand', cursive;
 }
 
 .event-title span4 {
@@ -164,7 +163,7 @@ main {
     opacity: 0.9;
     max-width: 600px;
     margin: 0 auto;
-    font-family: 'Edu VIC WA NT Hand', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Edu VIC WA NT Hand', Vendera, dsans-serif;
 }
 
 .categories {
@@ -206,6 +205,16 @@ main {
     border-bottom: 1px solid #eee;
 }
 
+.category-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.category-card .arte-trend-title {
+    font-family: 'Roboto', sans-serif;
+}
+
 .category-card .shorts-list {
     margin: 0;
     padding: 0;
@@ -227,8 +236,8 @@ main {
 }
 
 .category-card .shorts-rank {
-    font-size: 0.9rem;
-    font-weight: bold;
+    font-size: 1rem;
+    font-weight: 700;
     color: #FF007F;
     min-width: 25px;
     text-align: center;
@@ -240,24 +249,26 @@ main {
 }
 
 .category-card .shorts-title {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: #333;
     margin-bottom: 0.1rem;
 }
 
 .category-card .shorts-views {
-    font-size: 0.75rem;
-    color: #666;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #4000ffe5;
     margin-left: 0.5rem;
 }
 
 .category-card .shorts-trend {
-    font-size: 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 700;
     margin-left: 0.5rem;
     min-width: 25px;
     text-align: right;
-    color: #4000ffe5;
+    color: #FF007F;
 }
 
 .category-card p {
@@ -463,6 +474,11 @@ color: #08a4f1;
 }
 
 .event-card2 {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     border: 1px solid #eee;
     border-radius: 15px;
     overflow: hidden;
@@ -722,8 +738,8 @@ footer {
 
 .keyword-rank {
     font-size: 1rem;
-    font-weight: bold;
-    color: #4000ffe5;
+    font-weight: 700;
+    color: #FF007F;
     min-width: 30px;
     text-align: center;
 }
@@ -741,10 +757,12 @@ footer {
 }
 
 .keyword-trend {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 700;
     margin-left: 0.5rem;
     min-width: 30px;
     text-align: right;
+    color: #4000ffe5;
 }
 
 @media (max-width: 1200px) {
@@ -875,7 +893,9 @@ footer {
 .event-location {
     color: #666;
     font-size: 0.95rem;
+    margin-left: 0.5rem;
     margin-bottom: 0.8rem;
+    
 }
 
 .event-description {
@@ -931,5 +951,61 @@ footer {
         width: 100%;
         height: 180px;
     }
+}
+
+.trending-searches {
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.trending-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.trending-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+}
+
+.trending-btn {
+    background: white;
+    border: 2px solid #FF007F;
+    color: #FF007F;
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.trending-btn::before {
+    content: attr(data-rank);
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    background: #FF007F;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.trending-btn:hover {
+    background: #FF007F;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 0, 127, 0.2);
 }
 

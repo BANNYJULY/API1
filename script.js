@@ -237,3 +237,52 @@ gapi.load('client', initYouTubeAPI);
 
 // 24시간마다 동영상 새로고침
 setInterval(loadYouTubeVideos, 24 * 60 * 60 * 1000);
+
+// 검색 이벤트 핸들러
+function handleSearch(event) {
+    event.preventDefault();
+    const searchInput = document.getElementById('culture-search-input');
+    const keyword = searchInput.value.trim();
+    
+    if (keyword) {
+        // 문화교육 관련 키워드 체크
+        const educationKeywords = ['교육', '강좌', '강의', '수업', '문화교육', '예술교육', '아카데미'];
+        const isEducationRelated = educationKeywords.some(eduKeyword => 
+            keyword.includes(eduKeyword)
+        );
+
+        if (isEducationRelated) {
+            // 문화교육 관련 검색어는 BSARTE 웹사이트로 이동
+            window.open('https://bsarte.bscf.or.kr/', '_blank');
+        } else {
+            // 그 외 검색어는 네이버 검색으로 이동
+            const searchQuery = encodeURIComponent(`부산 문화 ${keyword}`);
+            window.open(`https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=${searchQuery}`, '_blank');
+        }
+    }
+}
+
+// 검색 폼 이벤트 리스너 등록
+document.getElementById('culture-search-form').addEventListener('submit', handleSearch);
+
+// 실시간 검색어 버튼 클릭 이벤트
+document.querySelectorAll('.trending-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const keyword = button.textContent;
+        
+        // 문화교육 관련 키워드 체크
+        const educationKeywords = ['교육', '강좌', '강의', '수업', '문화교육', '예술교육', '아카데미'];
+        const isEducationRelated = educationKeywords.some(eduKeyword => 
+            keyword.includes(eduKeyword)
+        );
+
+        if (isEducationRelated) {
+            // 문화교육 관련 검색어는 BSARTE 웹사이트로 이동
+            window.open('https://bsarte.bscf.or.kr/', '_blank');
+        } else {
+            // 그 외 검색어는 네이버 검색으로 이동
+            const searchQuery = encodeURIComponent(`부산 문화 ${keyword}`);
+            window.open(`https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=${searchQuery}`, '_blank');
+        }
+    });
+});

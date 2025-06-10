@@ -14,6 +14,7 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Hand:wght@400..700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
 </head>
@@ -21,7 +22,7 @@
     <header>
         <div class="container1">
             <div class="header-content">
-                <div class="logo"><span1>C</span1>ity  <span2>o</span2>f  <span2>C</span2>ulture,</div>  <div class="logo1"><span1>Busan</span1>  <span2>is</span2>  <span3>Variety!</span3></div>
+                <div class="logo"><span1>C</span1>ity  <span2>o</span2>f  <span3>C</span3>ulture,</div>  <div class="logo1"><span1>Busan</span1>  <span2>is</span2>  <span3>Variety!</span3></div>
             </div>
             <nav>
                 <ul>
@@ -40,9 +41,9 @@
         <div class="container2">
             <div class="main-content">
                 <section class="hero" id="home">
-                    <h1>부산 문화콘텐츠의 모든 것</h1>
-                    <p>부산의 다양한 문화예술 공연, 행사, 교육 정보를 한 곳에서 만나보세요. 
-                       풍부한 문화 콘텐츠와 함께 <span>부산</span>의 예술적 매력을 발견하세요.</p>
+                    <h1>부산  문화콘텐츠의  모든  것</h1>
+                    <p><span1>부산</span1>의 <span3>다양한</span3> 문화예술콘텐츠를 한 곳에 만나보세요. </br> 
+                       충만한 <span1>문화</span1>의 <span3>도시</span3>, 부산의 매력을 발견하세요.</p>
                 </section>
 
                 <section class="culture-search">
@@ -56,6 +57,16 @@
                                 <button type="submit" class="search-btn">검색</button>
                             </div>
                         </form>
+                        <div class="trending-searches">
+                            <span class="trending-label">실시간 인기 검색어</span>
+                            <div class="trending-buttons">
+                                <button class="trending-btn" data-rank="1">부산국제영화제</button>
+                                <button class="trending-btn" data-rank="2">부산비엔날레</button>
+                                <button class="trending-btn" data-rank="3">부산불꽃축제</button>
+                                <button class="trending-btn" data-rank="4">부산문화회관</button>
+                                <button class="trending-btn" data-rank="5">부산시립미술관</button>
+                            </div>
+                        </div>
                         <div id="search-results" class="search-results">
                             <!-- 검색 결과가 여기에 동적으로 표시됩니다 -->
                         </div>
@@ -80,12 +91,12 @@
                     </div>
                     <div class="category-card">
                         <span class="category-icon">🎯</span>
-                        <h3>한국문화예술진흥원 트렌드</h3>
+                        <h3 class="arte-trend-title">Arte의 트렌드</h3>
                         <div class="keyword-list">
                             <div class="keyword-item">
                                 <div class="keyword-rank">1</div>
                                 <div class="keyword-content">
-                                    <div class="keyword-title">시민·사회 문화예술교육</div>
+                                    <div class="keyword-title">시민사회문화예술</div>
                                 </div>
                                 <div class="keyword-trend">▲2</div>
                             </div>
@@ -106,14 +117,14 @@
                             <div class="keyword-item">
                                 <div class="keyword-rank">4</div>
                                 <div class="keyword-content">
-                                    <div class="keyword-title">문화예술교육 R&D</div>
+                                    <div class="keyword-title">문화예술 R&D</div>
                                 </div>
                                 <div class="keyword-trend">▲1</div>
                             </div>
                             <div class="keyword-item">
                                 <div class="keyword-rank">5</div>
                                 <div class="keyword-content">
-                                    <div class="keyword-title">어린이 문화예술교육</div>
+                                    <div class="keyword-title"> 어린이 예술교육</div>
                                 </div>
                                 <div class="keyword-trend">-</div>
                             </div>
@@ -128,12 +139,12 @@
                     <div class="category-card">
                         <span class="category-icon">🎨</span>
                         <h3>문화교육</h3>
-                        <p>부산의 문화예술 교육 프로그램과 강좌 정보를 확인하세요. 다양한 배움의 기회를 제공합니다.</p>
+                        <p>부산의 다양한 배움의 기회를 제공하는 문화예술 교육 프로그램과 강좌 정보를 확인하세요.</p>
                         <a href="https://www.bscc.or.kr/edu/" class="btn">더 보기</a>
                     </div>
                     <div class="category-card">
                         <span class="category-icon">📺</span>
-                        <h3>미리보는 문화 숏텐츠</h3>
+                        <h3>이슈 문화 숏텐츠</h3>
                         <div class="shorts-list">
                             <div class="shorts-item">
                                 <div class="shorts-rank">1</div>
@@ -346,7 +357,7 @@
 
     <footer>
         <div class="container">
-            <p> COPYRIGHT 2025 A.H.T. Lab ALL RIGHTS RESERVED.</p>
+            <p>&copy; 2025 부산 문화예술. 모든 권리 보유.</p>
             <div class="social-links">
                 <a href="#">📘</a>
                 <a href="#">📷</a>
