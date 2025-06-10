@@ -18,3 +18,12 @@
        < 블로그 링크 주소 복사 >
 
     https://claude.ai/public/artifacts/79a79fef-bee6-4cf8-8c2d-806966f7c4f2
+
+    .event-image2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    }

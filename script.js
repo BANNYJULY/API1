@@ -159,3 +159,81 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// YouTube API 설정
+const API_KEY = 'AIzaSyBH9j7EaldMF3jqhoY-V938DsKc0zUUolg';
+const CHANNEL_ID = 'UChlgI3UHCOnwUGzWzbJ3H5w';  // 부산문화재단 채널 ID
+const MAX_RESULTS = 4;  // 표시할 동영상 수
+
+// YouTube API 초기화 및 동영상 로드
+function initYouTubeAPI() {
+    gapi.client.init({
+        'apiKey': API_KEY,
+        'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest']
+    }).then(function() {
+        loadYouTubeVideos();
+    }).catch(function(error) {
+        console.error('Error initializing YouTube API:', error);
+    });
+}
+
+// YouTube 동영상 로드
+function loadYouTubeVideos() {
+    gapi.client.youtube.search.list({
+        part: 'snippet',
+        channelId: CHANNEL_ID,
+        maxResults: MAX_RESULTS,
+        order: 'date',
+        type: 'video'
+    }).then(function(response) {
+        const videos = response.result.items;
+        updateVideoGrid(videos);
+    }).catch(function(error) {
+        console.error('Error loading videos:', error);
+    });
+}
+
+// 비디오 그리드 업데이트
+function updateVideoGrid(videos) {
+    const videoGrid = document.querySelector('.events-grid2');
+    videoGrid.innerHTML = '';  // 기존 콘텐츠 삭제
+
+    videos.forEach(video => {
+        const videoId = video.id.videoId;
+        const videoTitle = video.snippet.title;
+        const publishedAt = new Date(video.snippet.publishedAt).toLocaleDateString();
+        
+        const videoCard = document.createElement('div');
+        videoCard.className = 'event-card2';
+        videoCard.setAttribute('data-category', 'performance');
+        
+        videoCard.innerHTML = `
+            <div class="event-image2">
+                <iframe width="560" height="315" 
+                    src="https://www.youtube.com/embed/${videoId}" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="event-content2">
+                <div class="event-date">${publishedAt}</div>
+                <h3 class="event-title">${videoTitle}</h3>
+                <div class="event-location">
+                    <a href="https://www.bscf.or.kr/" target="_blank">부산문화재단</a>
+                </div>
+                <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="btn">시청하기</a>
+            </div>
+        `;
+        
+        videoGrid.appendChild(videoCard);
+    });
+}
+
+// YouTube API 로드
+gapi.load('client', initYouTubeAPI);
+
+// 24시간마다 동영상 새로고침
+setInterval(loadYouTubeVideos, 24 * 60 * 60 * 1000);
