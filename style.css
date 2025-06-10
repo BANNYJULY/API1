@@ -198,10 +198,66 @@ main {
     display: block;
 }
 
-.category-card h3 {
+.category-card h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     color: #333;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.category-card .shorts-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.category-card .shorts-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    margin-bottom: 0.5rem;
+    transition: transform 0.2s ease;
+    border-radius: 8px;
+}
+
+.category-card .shorts-item:hover {
+    transform: translateX(5px);
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.category-card .shorts-rank {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #FF007F;
+    min-width: 25px;
+    text-align: center;
+}
+
+.category-card .shorts-content {
+    flex: 1;
+    margin-left: 0.5rem;
+}
+
+.category-card .shorts-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.1rem;
+}
+
+.category-card .shorts-views {
+    font-size: 0.75rem;
+    color: #666;
+    margin-left: 0.5rem;
+}
+
+.category-card .shorts-trend {
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+    min-width: 25px;
+    text-align: right;
+    color: #4000ffe5;
 }
 
 .category-card p {
@@ -644,33 +700,13 @@ footer {
     margin-top: 0;
 }
 
-.trending-shorts {
-    width: 300px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    padding: 1.5rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    position: absolute;
-    top: 280px;
-    right: 20px;
-}
-
-.trending-shorts h2 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    text-align: left;
-    color: #333;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #eee;
-}
-
-.shorts-list {
+.keyword-list {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-.shorts-item {
+.keyword-item {
     display: flex;
     align-items: center;
     padding: 0.5rem 0;
@@ -679,43 +715,36 @@ footer {
     border-radius: 8px;
 }
 
-.shorts-item:hover {
+.keyword-item:hover {
     transform: translateX(5px);
     background: rgba(102, 126, 234, 0.05);
 }
 
-.shorts-rank {
+.keyword-rank {
     font-size: 1rem;
     font-weight: bold;
-    color: #FF007F;
+    color: #4000ffe5;
     min-width: 30px;
     text-align: center;
 }
 
-.shorts-content {
+.keyword-content {
     flex: 1;
     margin-left: 0.5rem;
 }
 
-.shorts-title {
+.keyword-title {
     font-size: 0.9rem;
     font-weight: 600;
     color: #333;
     margin-bottom: 0.1rem;
 }
 
-.shorts-views {
-    font-size: 0.8rem;
-    color: #666;
-    margin-left: 0.5rem;
-}
-
-.shorts-trend {
+.keyword-trend {
     font-size: 0.8rem;
     margin-left: 0.5rem;
     min-width: 30px;
     text-align: right;
-    color: #4000ffe5;
 }
 
 @media (max-width: 1200px) {
