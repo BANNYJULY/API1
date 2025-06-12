@@ -1,7 +1,26 @@
 // KOPIS API 설정
-const KOPIS_API_KEY = 'your_api_key_here'; // KOPIS API 키를 여기에 입력하세요
+const KOPIS_API_KEY = '4e1f7b2e0c5a4f2e9b8d7c6a3f2e1d0b'; // KOPIS API 키
 const AREA_CODE = '26'; // 부산시 지역코드
 const BASE_URL = 'http://kopis.or.kr/openApi/restful';
+
+// 날짜 포맷팅 함수 (YYYYMMDD)
+function formatDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}${month}${day}`;
+}
+
+// 표시용 날짜 포맷팅 함수 (YYYY.MM.DD)
+function formatDisplayDate(dateStr) {
+    return dateStr.replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3');
+}
+
+// XML에서 특정 태그의 텍스트 내용 가져오기
+function getElementText(parent, tagName) {
+    const element = parent.getElementsByTagName(tagName)[0];
+    return element ? element.textContent : '';
+}
 
 // 공연 목록 가져오기
 async function fetchPerformances() {
@@ -9,7 +28,6 @@ async function fetchPerformances() {
     const oneMonthLater = new Date(today);
     oneMonthLater.setMonth(today.getMonth() + 1);
 
-    // YYYY.MM.DD 형식으로 날짜 포맷팅
     const stdate = formatDate(today);
     const eddate = formatDate(oneMonthLater);
 
@@ -27,6 +45,7 @@ async function fetchPerformances() {
         updatePerformanceGrid(performances);
     } catch (error) {
         console.error('공연 정보 로드 실패:', error);
+        showErrorMessage();
     }
 }
 
@@ -51,20 +70,6 @@ function parseKopisXml(xmlText) {
     }
 
     return performances;
-}
-
-// XML 요소 텍스트 가져오기
-function getElementText(item, tagName) {
-    const element = item.getElementsByTagName(tagName)[0];
-    return element ? element.textContent : '';
-}
-
-// 날짜 포맷팅 함수 (YYYYMMDD)
-function formatDate(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}${month}${day}`;
 }
 
 // 공연 상세 정보 가져오기
@@ -127,37 +132,53 @@ async function updatePerformanceGrid(performances) {
     }
 }
 
-// 화면 표시용 날짜 포맷팅 (YYYY.MM.DD)
-function formatDisplayDate(dateStr) {
-    return dateStr.replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3');
+// 에러 메시지 표시
+function showErrorMessage() {
+    const eventsGrid = document.querySelector('.events-grid');
+    if (!eventsGrid) return;
+
+    eventsGrid.innerHTML = `
+        <div class="error-message">
+            <p>공연 정보를 불러오는데 실패했습니다.</p>
+            <p>잠시 후 다시 시도해주세요.</p>
+        </div>
+    `;
+}
+
+// 필터링 기능 추가
+function initializeFilters() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // 활성화된 버튼 스타일 변경
+            filterButtons.forEach(btn => btn.classList.remove('active1'));
+            button.classList.add('active1');
+
+            const filter = button.getAttribute('data-filter');
+            filterPerformances(filter);
+        });
+    });
+}
+
+// 공연 필터링
+function filterPerformances(filter) {
+    const cards = document.querySelectorAll('.event-card');
+    
+    cards.forEach(card => {
+        const genre = card.getAttribute('data-category').toLowerCase();
+        if (filter === 'all' || genre === filter.toLowerCase()) {
+            card.classList.remove('hidden');
+        } else {
+            card.classList.add('hidden');
+        }
+    });
 }
 
 // 초기 로드 및 주기적 업데이트
 document.addEventListener('DOMContentLoaded', () => {
     fetchPerformances();
+    initializeFilters();
     // 6시간마다 공연 정보 업데이트
     setInterval(fetchPerformances, 6 * 60 * 60 * 1000);
-});
-
-// 카테고리 필터링 이벤트 핸들러 업데이트
-document.addEventListener('DOMContentLoaded', () => {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const filter = btn.dataset.filter;
-            const cards = document.querySelectorAll('.event-card');
-            
-            filterBtns.forEach(b => b.classList.remove('active1'));
-            btn.classList.add('active1');
-
-            cards.forEach(card => {
-                if (filter === 'all' || card.dataset.category === filter) {
-                    card.style.display = 'block';
-                    card.style.animation = 'fadeIn 0.5s ease';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    });
 }); 

@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Hand:wght@400..700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-
+    <script src="kopis_api.js" defer></script>
 </head>
 <body>
     <header>
@@ -195,84 +195,17 @@
                     <div class="filter-buttons">
                         <button class="filter-btn active1" data-filter="all">전체</button>
                         <br/>
-                        <button class="filter-btn" data-filter="performance">연극</button>
-                        <button class="filter-btn" data-filter="documentary">뮤지컬</button>
-                        <button class="filter-btn" data-filter="interview">콘서트</button>
-                        <button class="filter-btn" data-filter="education">국악</button>
-                        <button class="filter-btn" data-filter="dance">무용</button>
-                        <button class="filter-btn" data-filter="art">미술</button>
+                        <button class="filter-btn" data-filter="연극">연극</button>
+                        <button class="filter-btn" data-filter="뮤지컬">뮤지컬</button>
+                        <button class="filter-btn" data-filter="콘서트">콘서트</button>
+                        <button class="filter-btn" data-filter="국악">국악</button>
+                        <button class="filter-btn" data-filter="무용">무용</button>
+                        <button class="filter-btn" data-filter="미술">미술</button>
                     </div>
                     <div class="events-grid">
-                        <div class="event-card">
-                            <div class="event-image">
-                                <img src="images/oedipus.jpg" alt="연극 포스터">
-                            </div>
-                            <div class="event-content">
-                                <div class="event-date">2025.05.23 - 2024.06.01</div>
-                                <h3 class="event-title">오이디푸스의 노래</h3>
-                                <div class="event-location"><a href="https://www.bipaf.org/" target="_blank">부산국제연극제</a></div>
-                                <a href="https://www.bipaf.org/page/?pid=ticket" class="btn">예매하기</a>
-                            </div>
-                        </div>
-                        <div class="event-card">
-                            <div class="event-image">
-                                <img src="images/alladdin.jpg" alt="뮤지컬 포스터">
-                            </div>
-                            <div class="event-content">
-                                <div class="event-date">2025.07.11 - 2025.09.28</div>
-                                <h3 class="event-title">가족 뮤지컬 <span4>"알라딘"</span4></h3>
-                                <div class="event-location"> <a href="https://www.dreamtheatre.co.kr/">부산 드림씨어터</a></div>
-                                <a href="https://www.dreamtheatre.co.kr/Performance/Performance/Detail?num=111" class="btn">예매하기</a>
-                            </div>
-                        </div>
-                        <div class="event-card">
-                            <div class="event-image">
-                                <img src="images/dsch.jpg" alt="콘서트 포스터">
-                            </div>
-                            <div class="event-content">
-                                <div class="event-date">2025.06.19. 목요일 19시 30분</div>
-                                <h3 class="event-title">부산시립교향악단 연주회</h3>
-                                <div class="event-location"><a href="https://www.bscc.or.kr/main/">부산문화회관</a></div>
-                                <a href="https://www.bscc.or.kr/01_perfor/?mcode=0401010200&mode=2&no=25438" class="btn">예매하기</a>
-                            </div>
-                        </div>
-                        <div class="event-card">
-                            <div class="event-image">
-                                <img src="images/gugak.jpg" alt="국악 포스터">
-                            </div>
-                            <div class="event-content">
-                                <div class="event-date">2025.05.14 - 2025.06.14</div>
-                                <h3 class="event-title">국악의 날, 전통이음무대</h3>
-                                <div class="event-location"> <a href="https://busan.gugak.go.kr/" target="_blank">국립부산국악원</a></div>
-
-                                <a href="https://busan.gugak.go.kr/BG/contents/BG0106020000.do/" class="btn">예매하기</a>
-                            </div>
-                        </div>
-                        <div class="event-card" data-category="dance">
-                            <div class="event-image">
-                                <img src="images/carmina.jpg" alt="무용 포스터">
-                            </div>
-                            <div class="event-content">
-                                <div class="event-date">2025.06.05 - 2025.06.07</div>
-                                <h3 class="event-title">헝가리발레단 "카르미나 부라나"</h3>
-                                <div class="event-location">
-                                    <a href="https://www.bidf.kr/" target="_blank">부산국제무용제</a>
-                                </div>
-                                <a href="https://www.dureraum.org/bcc/ccontents/view.do?rbsIdx=40&contentsCode=20250416001" class="btn">예매하기</a>
-                            </div>
-                        </div>
-                        <div class="event-card" data-category="art">
-                            <div class="event-image">
-                                <img src="images/nun.png" alt="미술 전시 포스터">
-                            </div>
-                            <div class="event-content">
-                                <div class="event-date">2025.05.25 - 2025.08.25</div>
-                                <h3 class="event-title">부산현대미술관 "열개의 눈"</h3>
-                                <div class="event-location">
-                                    <a href="https://www.busan.go.kr/moca/" target="_blank">부산현대미술관</a>
-                                </div>
-                                <a href="https://www.busan.go.kr/moca/exhibition01/1676146" class="btn">예매하기</a>
-                            </div>
+                        <!-- 공연 정보가 동적으로 로드됩니다 -->
+                        <div class="loading-message">
+                            <p>공연 정보를 불러오는 중입니다...</p>
                         </div>
                     </div>
                 </section>
